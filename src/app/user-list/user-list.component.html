@@ -1,0 +1,43 @@
+<div class="space-y-8">
+  <input type="text" (input)="onSearch($event)" placeholder="Search users or workouts"
+         class="w-full text-white px-3 py-2 border border-[#ffffff]/20 rounded-md shadow-sm focus:outline-none focus:ring-sky-500 focus:border-sky-500 bg-[#111111]">
+
+  <table class="min-w-full divide-y divide-[#9747FF]/30">
+    <thead class="bg-[#111111]">
+      <tr>
+        <th class="px-6 py-3 text-left text-xs font-medium text-white uppercase tracking-wider">Name</th>
+        <th class="px-6 py-3 text-left text-xs font-medium text-white uppercase tracking-wider">Workout Type</th>
+        <th class="px-6 py-3 text-left text-xs font-medium text-white uppercase tracking-wider">Minutes</th>
+      </tr>
+    </thead>
+    <tbody class="bg-[#111111] divide-y divide-[#ffffff]/10 text-[#ffffff]/70">
+      <tr *ngFor="let user of pagedUsers">
+        <td class="px-6 py-4 whitespace-nowrap">{{ user.name }}</td>
+        <td class="px-6 py-4 whitespace-nowrap">
+          <span *ngFor="let workout of user.workouts">{{ workout.type }}<br></span>
+        </td>
+        <td class="px-6 py-4 whitespace-nowrap">
+          <span *ngFor="let workout of user.workouts">{{ workout.minutes }}<br></span>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+
+  <div class="flex justify-between items-center">
+    <button (click)="changePage(currentPage - 1)"
+        [disabled]="currentPage === 1"
+        class="px-4 py-2 text-sm font-semibold rounded-md text-[#ffffff]
+               bg-gradient-to-r from-[#1111] to-[#ff9c32]
+               hover:bg-[#ff9c32]">
+  Previous
+</button>
+    <span class="text-[#9747FF]">Page {{ currentPage }} of {{ totalPages }}</span>
+    <button (click)="changePage(currentPage + 1)"
+        [disabled]="currentPage === totalPages"
+        class="px-4 py-2 text-sm font-semibold rounded-md text-[#ffffff]
+               bg-gradient-to-l from-[#1111] to-[#ff9c32]
+               hover:bg-[#ff9c32]">
+  Next
+</button>
+  </div>
+</div>
